@@ -9,16 +9,18 @@ RUN apk --no-cache add ffmpeg git && \
     chown app:app /tmp/torrent-stream
 
 WORKDIR /home/app
+RUN git clone https://github.com/stevetuk71/peerflix-server.git
+WORkDIR /home/app/peerflix-server
 COPY . .
 RUN chown app:app /home/app -R
 
 # run as user app from here on
 USER app
 RUN npm install && \
-    bower install && \
+    bower --allow-root install && \
     grunt build
 
 VOLUME [ "/tmp/torrent-stream" ]
-EXPOSE 6881 9000
+EXPOSE 9000
 
 CMD [ "npm", "start" ]
