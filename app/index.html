@@ -1,6 +1,24 @@
 <!doctype html>
 <html>
 <head>
+  
+  <script>
+function createCastLinks() {
+	//Get list of elements that are links
+	var elements = document.getElementsByTagName('a');
+	//Loop through all the elements
+	for (var i = 0; i < elements.length; i++) {
+		//Set the variable elementFileType to the characters after the period in the link
+		var elementFileType = elements[i].href.split('.')[elements[i].href.split('.').length - 1];
+		//Check if the filetype is mp4 or mkv
+		if ((elementFileType == 'mp4') || (elementFileType == 'mkv')) {
+			//Add a cast button, with the correct link
+			elements[i].innerHTML = elements[i].innerHTML + '</a> <a style="float:right" href="https://chromecast.wyrt.co.uk/?url=https://movies.wyrt.co.uk' + elements[i].href.split('wyrt.co.uk')[1] + '&"><div class="cast-small"></div>';
+		}
+	}
+}
+</script>
+  
   <meta charset="utf-8">
   <title>peerflix server</title>
   <meta name="description" content="peerflix server">
@@ -16,9 +34,10 @@
   <!-- endbuild -->
   <!-- build:css({.tmp,app}) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/chromecast.css">
   <!-- endbuild -->
 </head>
-<body ng-app="peerflixServerApp">
+<body onload="createCastLinks()" ng-app="peerflixServerApp">
     <!-- Add your site or application content here -->
     <div class="container" ng-view=""></div>
 
