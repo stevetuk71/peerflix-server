@@ -9,7 +9,7 @@ RUN apk --no-cache add ffmpeg git && \
     chown app:app /tmp/torrent-stream
 
 WORKDIR /home/app
-RUN git clone https://github.com/stevetuk71/peerflix-server.git
+RUN git clone https://github.com/moafyuk/peerflix-server.git
 WORkDIR /home/app/peerflix-server
 COPY . .
 RUN chown app:app /home/app -R
